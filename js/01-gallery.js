@@ -17,7 +17,9 @@ const galleryTemplate = ( {preview, original, description} ) =>
         />
         </a>
     </div>`;
-
+    
+let instance = {};
+    
 const render = () => {
     const galleryList = galleryItems.map((galleryItem) => galleryTemplate(galleryItem)).join('');
 
@@ -47,7 +49,7 @@ function onGalaryItemClick (evt) {
 
     parentGalleryImage.classList.add('basicLightbox--img');
     
-    const instance = basicLightbox.create(
+    instance = basicLightbox.create(
         `
         <img src="${evt.target.dataset.source}" width="800" height="600">
         `
@@ -57,18 +59,19 @@ function onGalaryItemClick (evt) {
 
 };
 
-// refs.gallery.addEventListener('keydown', onCloseModalKeydown)
 
-// function onCloseModalKeydown(evt) {
-//     evt.preventDefault();
-//     if (evt.code === "Escape") {
-//         console.log(evt);
-//         console.log(evt.target);
-//         instance.close()
 
-//     }
-//     console.log(evt);
-// };
+
+refs.gallery.addEventListener('keydown', onCloseModalKeydown)
+
+function onCloseModalKeydown(evt) {
+    evt.preventDefault();
+    if (evt.code === "Escape") {
+        instance.close()
+
+    }
+    console.log(evt);
+};
 
 console.log(galleryItems);
 
